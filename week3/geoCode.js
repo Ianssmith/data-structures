@@ -5,6 +5,7 @@ var cheerio = require("cheerio")
 var addresses = [];
 var uris = [];
 var pages = [];
+var meetingInfo = [];
 var state = ", New York, NY";
 var file = fs.readFileSync("site.html");
 
@@ -47,11 +48,29 @@ for(var k=1;k<uris.length;k++){
 	
 	$("dl",".col-md-4").each(function(i, el){
 		if(el.data != blank.test(el.data))
-		console.log($(el).text().trim().replace(/ +/g,"_"));
+		meetingInfo.push($(el).text().trim().replace(/,/g,"").replace(/\t+/g,"").replace(/\n+/g,"___").replace(/ +/g," "));
 		//console.log("__________________");
 	})	
 }
 
+for(var j=0;j<meetingInfo.length;j++){
+	meetingInfo[j] = meetingInfo[j].split("___");
+}
+
+//for(var r=0;r<meetingInfo[r].length;r++){
+//	var temp = meetingInfo[r].slice(3,5)
+//	var temp2 = temp.toString();
+//	console.log(temp2);
+//	meetingInfo[r].splice(3,temp2)
+//	}
+
+//for(var r=0;r<meetingInfo[r].length;r++){
+	//for(var l=0;l<meetingInfo[1][l].length;l++){
+	//console.log(meetingInfo[r][l]);
+	//}
+//}
+
+	console.log(meetingInfo);
 
 	
 	
