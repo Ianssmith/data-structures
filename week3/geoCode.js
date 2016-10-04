@@ -132,5 +132,5 @@ async.eachSeries(objArray, function(value, callback) {
 		});
 	setTimeout(callback, 1000);
 },function() {
-	    console.log((objArray));
+	    console.log(JSON.stringify(objArray));
 });
