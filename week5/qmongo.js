@@ -1,3 +1,6 @@
+var datetimeStart = new Date();
+var resp = [];
+
 var reggie = new RegExp("Tuesday 1?[7890]:[0134][05] pm")
 
 
@@ -12,9 +15,11 @@ mongoClient.connect(url, function(err, db){
 	collection.aggregate([{$match:{Time:reggie}}]).toArray(function(err, docs){
 		if(err){console.log(err)}	
 		else{
-			console.log(docs)
+			resp.push(docs)
 			}
 			db.close();
+			        console.log(new Date() - datetimeStart);
+
 		})
 
 })
