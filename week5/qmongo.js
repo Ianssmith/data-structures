@@ -18,6 +18,7 @@ mongoClient.connect(url, function(err, db){
 			resp.push(docs)
 			}
 			db.close();
+					console.log(resp)
 			        console.log(new Date() - datetimeStart);
 
 		})

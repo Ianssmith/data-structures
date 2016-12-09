@@ -18,8 +18,10 @@ var apiKey = process.env.GMAKEY;
 var blank = new RegExp("^\s*$");
 
 	/***** scrape site html into file (site.html) *****/
-			//request("http://meetings.nyintergroup.org/", function(err, response, body){
-
+			//request("http://meetings.nyintergroup.org/", function(err, response, body){	old version
+			//request("http://meetings.nyintergroup.org/?d=any&v=list", function(err, response, body){
+				//console.log(body)
+			//})
 	/***** scrape URI's into array *****/
 	var $ = cheerio.load(file);
 	var td = $("td[class=name]");
@@ -115,22 +117,63 @@ for(var i=0;i<objArray.length;i++){
 //console.log(objArray);
 
 /***** add addresses from array scraped earlier to respective objects *****/
+/***** create an array of uniq addresses  *****/
 
+
+var uniqadds = []
 for(var i=0;i<objArray.length;i++){
 	objArray[i].address = addresses[i];
+	//console.log(objArray[i].address)
+	//saved into "testpart.txt"
+	if(uniqadds.indexOf(objArray[i].address) === -1){
+		uniqadds.push(objArray[i].address)
+	}
 }
+//for (i in uniqadds){
+//console.log(uniqadds[i])
+//}
+
+
 
 //console.log(objArray);
 
-/*****request geo coords from googmaps and put into file (googObj.json)*****/
+//old version/*****request geo coords from googmaps and put into file (googObj.json)*****/
+/*****request geo coords from googmaps and put into file array for matching with obj *****/
 
-async.eachSeries(objArray, function(value, callback) {
-	var apiRequest = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + value.address + '&key=' + apiKey;
+var geoArr = []
+for(i in uniqadds){
+	var apiRequest = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + uniqadds[i] + '&key=' + apiKey;
 	request(apiRequest, function(err, resp, body) {
 		if (err) {throw err;}
-			value.latLong = JSON.parse(body).results[0].geometry.location;
-		});
-	setTimeout(callback, 1000);
-},function() {
-	    console.log(JSON.stringify(objArray));
-});
+			//value.latLong = JSON.parse(body).results[0].geometry.location;
+	  		geoArr.push(JSON.parse(body).results[0].geometry.location)
+		})
+		setTimeout(console.log(""),1000)
+	};
+
+
+//var geoArr = []
+//async.eachSeries(uniqadds, function(value, callback) {
+//	var apiRequest = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + value + '&key=' + apiKey;
+//	request(apiRequest, function(err, resp, body) {
+//		if (err) {throw err;}
+//			//value.latLong = JSON.parse(body).results[0].geometry.location;
+//	  		geoArr.push(JSON.parse(body).results[0].geometry.location)
+//		});
+//	setTimeout(callback, 1000);
+//},function() {
+//	    //console.log(JSON.stringify(uniqadds));
+//		//console.log("done!")
+//});
+//
+for(var i=0;i<objArray.length;i++){
+	for(var j=0;j<uniqadds.length;j++){
+		if(objArray[i].address == uniqadds[j]){
+			objArray[i].latLong = geoArr[j];
+		}
+	}
+}
+
+
+console.log(JSON.stringify(objArray))
+

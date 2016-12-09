@@ -24,12 +24,6 @@ app.get('/model/:model_name',function(req,res){
 
 
 var params = req.params.model_name
-//var base = req.baseUrl
-//var q = req.query
-//var head = req.headers
-//var ip = req.ip
-//var host = req.hostname
-//var prot = req.protocol
 	
 //res.send(req.params)
 console.log(params);
