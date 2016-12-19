@@ -12,6 +12,7 @@ var meetingInfo = [];
 var meetingKey = [];
 var state = ", New York, NY";
 var file = fs.readFileSync("site.html");
+var oldfile = fs.readFileSync("codeobj.json");
 var apiKey = process.env.GMAKEY;
 
 
@@ -35,18 +36,25 @@ var blank = new RegExp("^\s*$");
 
 
 	/***** scrape addresses into array *****/
-	var time = [];
 	var td = $("td[class=address]");
 	td.each(function(i,el){
 		//console.log(el)
 		//console.log("_______")
 		addresses.push(el.attribs["data-sort"].split("-").slice(0,-2))
 		//time.push(el.attribs["data-sort"].split("-").pop())
-		//addresses.push($(el).text().concat(state).replace(/ +/g,"+"));
 	});
 
+	var day = [];
+	var td = $("td[class=time]");
+	td.each(function(i,el){
+		//console.log(el)
+		//console.log("_______")
+		day.push($(el).find('span').first().text())
+	});
+	//console.log(time)
 
-	//console.log(time);
+
+	//console.log(prob);
 	//NOTE: manhattan logs 1191 meeting page urls
 
 
@@ -59,12 +67,11 @@ var blank = new RegExp("^\s*$");
 				fs.writeFileSync("pageCode/meeting"+i+".html", body)
 				i++;
 			})
-		   setTimeout(callback, 100);
+		   setTimeout(callback, 1000);
 	}, function() {
-		    console.log("done");
+		    //console.log("done");
 	});
-		*/
-
+*/
 /****** import page code files *****/
 
 for(var k=1;k<=uris.length;k++){
@@ -97,10 +104,14 @@ for(var j=0;j<meetingInfo.length;j++){
 //console.log(meetingKey)
 //console.log(meetingInfo)
 
+
 /***** combine arrays into objects and put in object array (codeobj.txt)*****/
+/**** they updated the site again and  the above code no longer works import in old page code results from codeobj.txt ******/
+//console.log(JSON.parse(oldfile))
 
-var objArray = [];
+//var objArray = [];
 
+/*
 var i=0;
 var place = 0;
 for(var t=0;t<uris.length-1;t++){
@@ -115,6 +126,7 @@ for(var t=0;t<uris.length-1;t++){
 			break}
 	}
 }
+*/
 
 //console.log(objArray[objArray.length-1].Location);
 //console.log(objArray[objArray.length-1])
@@ -124,18 +136,22 @@ for(var t=0;t<uris.length-1;t++){
 	//objArray[i]["Location"] = objArray[i]["Location"].split(",")
 	//objArray[i]["Location"] =  objArray[i]["Location"][1]
 //}
-		
+var objArray = JSON.parse(oldfile)		
+
+
 
 /***** add addresses from array scraped earlier to respective objects *****/
 /***** create an array of uniq addresses  *****/
 var days = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
 
 var uniqadds = []
+
 for(var i=0;i<objArray.length;i++){
 	objArray[i]["Location"] = objArray[i]["Location"].replace(/\s*\(.*?\)\s*/g, "")
-	objArray[i].day = objArray[i].Time.split(" ").shift()
+	objArray[i].day = day[i];
+	//objArray[i].day = objArray[i].Time.split(" ").shift()
 		for(var d=0;d<days.length;d++){
-			if(objArray[i].day === days[d]){objArray[i].day = d}
+			if(objArray[i].day == days[d]){objArray[i].day = d}
 		}
 	objArray[i].begin = objArray[i].Time.split(" ").slice(1,3)
 		 var temp = objArray[i].begin[0].split(":") 
@@ -171,6 +187,7 @@ for(var i=0;i<objArray.length;i++){
 	if(uniqadds.indexOf(objArray[i].address) === -1){
 		uniqadds.push(objArray[i].address)
 	}
+
 }
 //console.log(uniqadds.length)
 
@@ -179,18 +196,6 @@ for(var i=0;i<objArray.length;i++){
 
 //old version/*****request geo coords from googmaps and put into file (googObj.json)*****/
 /*****request geo coords from googmaps and put into file array for matching with obj *****/
-/*
-var geoArr = []
-for(i in uniqadds){
-	var apiRequest = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + uniqadds[i] + '&key=' + apiKey;
-	request(apiRequest, function(err, resp, body) {
-		if (err) {throw err;}
-			//value.latLong = JSON.parse(body).results[0].geometry.location;
-	  		geoArr.push(JSON.parse(body).results[0].geometry.location)
-		})
-		setTimeout(console.log(""),1000)
-	};
-*/
 var i=0;
 var geoArr = []
 var R = []
