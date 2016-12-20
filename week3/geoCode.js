@@ -9,7 +9,7 @@ var addresses = [];
 var uris = [];
 var pages = [];
 var meetingInfo = [];
-var meetingKey = [];
+var meetingKey = ["Time", "Location", "Location-details", "Group"];
 var state = ", New York, NY";
 var file = fs.readFileSync("site.html");
 var oldfile = fs.readFileSync("codeobj.json");
@@ -24,6 +24,7 @@ var blank = new RegExp("^\s*$");
 				//request("http://meetings.nyintergroup.org/?d=any&r=1864&v=list", function(err, response, body){  //manhattan
 				//console.log(body)
 				//})
+
 	/***** scrape URI's into array *****/
 	var $ = cheerio.load(file);
 	var td = $("td[class=name]");
@@ -58,7 +59,7 @@ var blank = new RegExp("^\s*$");
 	//NOTE: manhattan logs 1191 meeting page urls
 
 
-	/***** scrape meeting page code and put in files (pageCode/) *****/
+	/***** scrape meeting page code and put into files (pageCode/) *****/
 		/*
 		var i=1;
 		async.eachSeries(uris, function(value,callback) {
@@ -78,67 +79,47 @@ for(var k=1;k<=uris.length;k++){
 	file = fs.readFileSync("pageCode/meeting"+k+".html");
 	var $ = cheerio.load(file);
 
-/****** seperate page info into two arrays to be combined as objects *****/
+/****** seperate page info into array to be combined keys *****/
 	
-	$("dt","dl").each(function(i, el){
-		if(el.data != blank.test(el.data))
-		meetingKey.push($(el).text().trim().replace(/,/g,"").replace(/\t+/g,"").replace(/\n+/g,"___").replace(/ +/g," "));
-		//console.log("__________________");
-	})	
 
-	$("dd","dl").each(function(i, el){
-		if(el.data != blank.test(el.data))
-		meetingInfo.push($(el).text().trim().replace(/,/g,"").replace(/\t+/g," ").replace(/\n+/g,"___").replace(/ +/g," "));
-		//console.log("__________________");
+	$(".list-group-item").each(function(i, el){
+		meetingInfo.push($(el).text().trim().replace(/\t+/g," ").replace(/\n/g," ").replace(/\'/g,""))
 	})	
 }
 
-for(var j=0;j<meetingKey.length;j++){
-	meetingKey[j] = meetingKey[j].split("___");
-}
-for(var j=0;j<meetingInfo.length;j++){
-	meetingInfo[j] = meetingInfo[j].split("___");
-}
-
-
-//console.log(meetingKey)
 //console.log(meetingInfo)
 
+/***** combine arrays into objects (codeobj.txt)*****/
 
-/***** combine arrays into objects and put in object array (codeobj.txt)*****/
-/**** they updated the site again and  the above code no longer works import in old page code results from codeobj.txt ******/
-//console.log(JSON.parse(oldfile))
+var objArray = [];
 
-//var objArray = [];
 
-/*
+
 var i=0;
 var place = 0;
+var limiter = 0;
 for(var t=0;t<uris.length-1;t++){
 		objArray[t] = new Object();
 	
 	for(i=place;i<meetingInfo.length;i++){
-		if(meetingKey[i] != 'Last Contact Date'){
-		place++;
-			objArray[t][meetingKey[i]] = meetingInfo[i].toString();
-		}else{
+		if(limiter > 3 && meetingInfo[i].indexOf("Update") == -1){
 			place++;
-			break}
+			continue;
+		}else if(limiter > 3 && meetingInfo[i].indexOf("Update") !== -1){
+			//objArray[t][meetingKey[limiter]] = meetingInfo[i].toString();
+		//}else{
+			place++;
+			limiter = 0;
+			break;
+		}else{
+			objArray[t][meetingKey[limiter]] = meetingInfo[i];
+			place++;
+			limiter++;
+		}
 	}
+	delete objArray[t]['Location-details']
+//console.log(JSON.stringify(objArray[t]))
 }
-*/
-
-//console.log(objArray[objArray.length-1].Location);
-//console.log(objArray[objArray.length-1])
-		
-//for(var i=0;i<objArray.length;i++){
-	//objArray[i]["Location"] = objArray[i]["Location"].replace(/\s*\(.*?\)\s*/g, "")
-	//objArray[i]["Location"] = objArray[i]["Location"].split(",")
-	//objArray[i]["Location"] =  objArray[i]["Location"][1]
-//}
-var objArray = JSON.parse(oldfile)		
-
-
 
 /***** add addresses from array scraped earlier to respective objects *****/
 /***** create an array of uniq addresses  *****/
@@ -192,7 +173,7 @@ for(var i=0;i<objArray.length;i++){
 //console.log(uniqadds.length)
 
 
-//console.log(objArray);
+//console.log(JSON.stringify(objArray));
 
 //old version/*****request geo coords from googmaps and put into file (googObj.json)*****/
 /*****request geo coords from googmaps and put into file array for matching with obj *****/
@@ -200,7 +181,6 @@ var i=0;
 var geoArr = []
 var R = []
 var B = []
-
 async.eachSeries(uniqadds, function(value, callback) {
 	//console.log(value)
 	var apiRequest = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + value + '&key=' + apiKey;
