@@ -1,3 +1,31 @@
+var data3 = [338
+,329
+,228
+,220
+,240
+,232
+,226
+,216
+,241
+,230
+,225
+,219
+,215
+,227
+,221
+,242
+,236
+,235
+,239
+,232
+,226
+,230
+,236
+,228
+,250
+,232
+,217]
+
 var data2 = [330
 ,323
 ,249
@@ -60,7 +88,6 @@ var pad = 10;
 
 
 	console.log(data)
-	//var fuckYouD3 = [];
 	var items = data.length;
 	var max = d3.max(data,function(d){return d});
 	var min = d3.min(data,function(d){return d});
@@ -83,7 +110,7 @@ var tempcolor;
 
 	var colors = d3.scaleLinear()
 		.domain([min,max])
-		.range(['#7FDBFF',"#0074D9"]);
+		.range(['#66DB88',"#25aa25"]);
 
 
 	var svg = d3.select("#chart").attr("align","center")
@@ -100,7 +127,7 @@ var tempcolor;
 		.style('opacity', 0);
 			
 	var chart = svg.selectAll("rect")
-		.data(data)
+		.data(data3)
 		.enter()
 		.append("rect")
 		.style("fill", function(d){return colors(d)})
@@ -113,7 +140,7 @@ var tempcolor;
 		tooltip.transition()
 			.style("opacity", 0.8)
 			
-			tooltip.html("<span style='color:#FFDC00'>#"+(i+1)+"</span> : "+d+"ms")
+			tooltip.html("<span style='color:#444488'>#"+(i+1)+"</span> : "+d+"ms")
 			.style("left", (d3.event.pageX-35)+"px")
 			.style("top", (d3.event.pageY-35)+"px")
 			
