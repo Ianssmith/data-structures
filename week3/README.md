@@ -43,8 +43,8 @@ The first time everything ended up working and I had a nice data base filled wit
 -In order to not query the website too much I saved my inital request into a file and ws pulling from there unforunatley the above result was pulling the 'day' value from an older file and so they were incorrect almost across the board.
 
 -So I went back again to fix it but in the process of finding the problem I rewrote the data for each of the meetings I was pulling from. Normally this
-would not have mattered but it turns out that in the meantime they had changed the structure of their website again removing the <dd> and <dt> tags with <li> 
-So this time I had to go back and re-write the entire second part to finally get:
+would not have mattered but it turns out that in the meantime they had changed the structure of their website again. 
+-So this time I had to go back and re-write the entire second part to finally get:
 
 	```
 	[{"Time":"2:00 am  to 3:15 am",
