@@ -3,8 +3,9 @@
 ##Project 1:
 (weeks 1-6)
 
-For the first project we scraped data from the New York AA meeting website, cleaned and standerdized the data and stored it in a MongoDB database.
-We then created an mongo Aggregation pipeline to feed meeting information to a simple front-end google maps application which shows the nearby meetings hapenning that day.
+-For the first project I scraped data from the New York AA meeting website, cleaned and standerdized the data and stored it in a MongoDB database.
+
+-We then created an mongo aggregation pipeline to feed meeting information to a simple front-end google maps application which shows the nearby meetings happening that day.
 
 ![alt text]( "")
 
