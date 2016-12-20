@@ -15,6 +15,7 @@ crane
     "acceleration": "4",
     "inclination": "59",
     "orientation": "1"},
+	...
 ```
 
 X_crane
@@ -29,6 +30,7 @@ X_crane
     "acceleration": "3",
     "inclination": "51",
     "orientation": "1"},
+	...
 ```
 
 elephant
@@ -41,6 +43,7 @@ elephant
     "acceleration": "6",
     "inclination": "38",
     "orientation": "2"},
+	...
 ```
 
 spider
@@ -53,5 +56,6 @@ spider
 	"acceleration":5,
 	"inclination":39,
 	"orientation":2}
+	...
 ```
 
