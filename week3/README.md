@@ -47,7 +47,7 @@ The first time everything ended up working nicely and I had a nice data base fil
 
 ####..but it wasn't done.
 
--In order to not query the website too much I saved my inital request into files and was pulling from those. Unforunatley the above result was pulling the 'day' value from an older file and so they were all incorrect. Not a big problem I just had to re-run the processing script and using the correct files.
+-In order to not query the website too much I saved my inital request into files and was pulling from those. Unforunatley the above result was pulling the 'day' value from an older file and so they were all incorrect. Not a big problem I just had to re-run the processing script using the correct files.
 
 -I went back to fix it and in the process of finding the problem I happened to requery and rewrite the data for each of the meetings from their site.
 Normally this would not have mattered, but it turns out that in the meantime they had changed the structure of their website again so while all it took to fix the 'day' problem was a small tweak, the rest of the pipeline after (as the day formatting was in the beginning) was now completely useless with the new site.
