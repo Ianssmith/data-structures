@@ -4,7 +4,7 @@ Begins to add sensor data for various origami models:
 	Queries for the models return the following:
 
 crane
-	```
+```
 [ { "model": "'crane'",
     "time": "Thu Nov 24 2016 02:12:42 GMT-0800 (PST)",
     "x": "1",
@@ -15,9 +15,10 @@ crane
     "acceleration": "4",
     "inclination": "59",
     "orientation": "1"},
-	```
+```
+
 X_crane
-	```
+```
 [ { "model": "'X_crane'",
     "time": "Thu Nov 24 2016 02:24:09 GMT-0800 (PST)",
     "x": "1",
@@ -28,9 +29,10 @@ X_crane
     "acceleration": "3",
     "inclination": "51",
     "orientation": "1"},
-	```
+```
+
 elephant
-	```
+```
 [ { "x": "3",
     "y": "2",
     "z": "4",
@@ -39,11 +41,10 @@ elephant
     "acceleration": "6",
     "inclination": "38",
     "orientation": "2"},
-	```
+```
 
-	```
 spider
-	```
+```
 [{"x":3,
 	"y":2,
 	"z":4,
@@ -52,5 +53,5 @@ spider
 	"acceleration":5,
 	"inclination":39,
 	"orientation":2}
-	```
+```
 
