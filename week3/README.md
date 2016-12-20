@@ -51,6 +51,7 @@ The first time everything ended up working nicely and I had a nice data base fil
 
 -I went back to fix it and in the process of finding the problem I happened to requery and rewrite the data in the files for each of the meetings from their site.
 Normally this would not have mattered, but it turns out that in the meantime they had changed the structure of their website again so while all it took to fix the 'day' problem was a small tweak, the rest of the pipeline after (as the day formatting was in the beginning) was now completely useless with the new site.
+
 -This time I had to go back and re-write almost the entire thing again to finally get:
 
 	```
