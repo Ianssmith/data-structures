@@ -36,21 +36,21 @@ Updated query results:
 
 
 ```
-[{"_id":"5858b1f699f2912be76c44c9",
+[{"_id":"585aa8d949fe4e4d2d5ad2c5",
 "Time":"7:00 pm  to 8:00 pm",
-"Location":"411 East 12th Street  411 E 12th StNew York,NY 10009",
- "Group":"THE 12TH STREET WORKSHOP #14816",
- "day":2,
- "begin":19,
- "address":"252+west+46th+street+new+york+ny+10036+usa",
- "latLong":{"lat":40.7593263,"lng":-73.98727389999999}},
-{"_id":"5858b1f699f2912be76c44ca",
+"Location":"411 East 12th Street  411 E 12th StNew York, NY 10009",
+"Group":"THE 12TH STREET WORKSHOP #14816",
+"day":2,
+"begin":19,
+"address":"411+east+12th+street+new+york+ny+10009+usa",
+"latLong":{"lat":40.7298724,"lng":-73.9827759}},
+{"_id":"585aa8d949fe4e4d2d5ad2c6",
 "Time":"7:00 pm  to 8:00 pm",
 "Location":"Addiction Institute  306 West 102nd StreetNew York, NY 10025",
 "Group":"WESTSIDE 11TH STEP MEDITATION WORKSHOP #15325",
 "day":2,
 "begin":19,
-"address":"411+east+12th+street+new+york+ny+10009+usa",
-"latLong":{"lat":40.7298724,"lng":-73.9827759}},
+"address":"306+west+102nd+street+new+york+ny+10025+usa",
+"latLong":{"lat":40.7991395,"lng":-73.9711355}},
 ...
 ```
