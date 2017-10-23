@@ -1,5 +1,5 @@
 This is where most of the work for the first project was done.
-I approached it in stages by extracting specific pieces of data into seperate arrays, cleaning them in the process,
+I approached it in stages by extracting specific pieces of data into separate arrays, cleaning them in the process,
 and then looping through those arrays combining them into their respective objects.
 
 -I'm not sure if this is the best approach, but it was the part of the project that I thought worked best for me.
@@ -9,7 +9,7 @@ confirming that your program works for as many foreseeable changes or inputs as 
 
 -I sort of ended up doing this project twice because of it.
 The first time everything ended up working nicely and I had a nice data base filled with data:
-####Or so I thought
+#### Or so I thought
 
 	```
 	[{"Time":"Tuesday 2:00 am to 3:15 am",
@@ -27,7 +27,7 @@ The first time everything ended up working nicely and I had a nice data base fil
 
 -I did not realize until later that in a rush I had copied and pasted the website url from the landing page which defaulted to meetings for the current day and not "any" day. So I had the data only for Tuesdays;
 
--By this time the site (recently undergoing construction) had changed enough that my processing page would not format all the addresses well enough for the google api and it would miss a few of the new addresses. So I had to redo the initial part; In the process I took the oportunity to add in some reformatting functions for the day of the week and the time of day;
+-By this time the site (recently undergoing construction) had changed enough that my processing page would not format all the addresses well enough for the google api and it would miss a few of the new addresses. So I had to redo the initial part; In the process I took the opportunity to add in some reformatting functions for the day of the week and the time of day;
 
 	```
 	[{"Time":"2:00 am to 3:15 am'",
@@ -45,11 +45,11 @@ The first time everything ended up working nicely and I had a nice data base fil
 
 -That being done I moved on to another task.
 
-####..but it wasn't done.
+#### ..but it wasn't done.
 
--In order to not query the website too much I saved my inital request into files and was pulling from those. Unforunatley the above result was pulling the 'day' value from an older file and so they were all incorrect. Not a big problem I just had to re-run the processing script using the correct files.
+-In order to not query the website too much I saved my initial request into files and was pulling from those. Unfortunately the above result was pulling the 'day' value from an older file and so they were all incorrect. Not a big problem I just had to re-run the processing script using the correct files.
 
--I went back to fix it and in the process of finding the problem I happened to requery and rewrite the data in the files for each of the meetings from their site.
+-I went back to fix it and in the process of finding the problem I happened to re-query and rewrite the data in the files for each of the meetings from their site.
 Normally this would not have mattered, but it turns out that in the meantime they had changed the structure of their website again so while all it took to fix the 'day' problem was a small tweak, the rest of the pipeline after (as the day formatting was in the beginning) was now completely useless with the new site.
 
 -This time I had to go back and re-write almost the entire thing again to finally get:
