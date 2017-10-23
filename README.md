@@ -9,7 +9,7 @@
 
 - I then created an aggregation pipeline for the MongoDB server to feed meeting information to a simple front-end google maps application which shows the nearby meetings happening that day.
 
-![alt text]( "")
+![alt text](googleMaps_project/mappingResult/Final_1_screenshot.png "Simple map showing location of upcoming meetings")
 
 ## Project 2: Creating a public facing API for visualizing data from a hand activity tracking device I made.
 (weeks7-10)
@@ -21,7 +21,7 @@ The sensor data was fed directly to a PostgreSQL database on an AWS Relational D
 
 - Finally I designed simple example use case for the data and API querying the API and plotting the data using matplotlib and D3.
 
-![alt text](week7/screenshots/crane.png "X and Y")
+![alt text](origamiViz_project/origamiViz/screenshots/crane.png "X and Y")
 
 
 Here is a chart of the Latency for Mongodb queries from the Google Maps project:(week5)
