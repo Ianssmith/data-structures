@@ -17,6 +17,8 @@
 - I used a 3 axis Accelerometer to measure the movements of an artists hand while folding an origami model. 
 The sensor data was fed directly to a PostgreSQL database on an AWS Relational Database Service (RDS) instance I set up.
 
+![alt text](origamiViz_project/origamiViz/screenshots/hand_tracker.jpg "X and Y")
+
 - To follow up I created a simple API which returned a json document for the data for whatever model or activity a developer requests.
 
 - Finally I designed simple example use case for the data and API querying the API and plotting the data using matplotlib and D3.
